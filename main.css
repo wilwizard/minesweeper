@@ -1,0 +1,11 @@
+.container {
+	width: 300px;
+	border: solid 1px black;
+	display: none;
+}
+
+.cell {
+	width : 30px;
+	height: 30px;
+	color: gray;
+}
