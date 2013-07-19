@@ -7,5 +7,19 @@
 .cell {
 	width : 30px;
 	height: 30px;
-	color: gray;
+	background-color: #AAA;
+	border-color: black;
+	display: inline;
+}
+
+.row {
+	height: 30px;
+}
+
+.clicked {
+	color: #555;
+}
+
+.board {
+
 }

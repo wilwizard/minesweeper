@@ -1,23 +1,40 @@
 
 
 
-$(document).ready(function(){
-
-	function randBomb(){ //function will return a bomb some of the time, and sometimes not
-		if (Math.random() > 0.3) { return null; }
-		else { return 'B'; }
+	//function will return a bomb some of the time, and sometimes not
+	function randBomb(){ 
+		if (Math.random() > 0.4) { return false; }
+		else { return true; }
 	}
 
+	//will create an nxn array
 	function randBoard(size){
 		var array = [];
 		for (var i = 0; i < size; i++) {
 			var row = []
 			for (var k = 0; k < size; k++) {
-				row.push(randBomb());
+				row.push(new cell());
 			}
 			array.push(row);
 		}
-		return array;
+		return placeNumbers(array);
+	}
+
+	function placeNumbers(grid) {
+		var limit = grid.length;
+		for (var i=0; i < grid.length; i++) {
+			for (var j=0; j < grid[i].length; j++) {
+				//i,j
+				var count = 0
+				for (var x = Math.max(i-1,0); x <= Math.min(i+1, limit-1); x++) {
+					for (var y = Math.max(j-1,0); y <= Math.min(j+1, limit-1); y++) {
+						if (grid[x][y].bomb) { count++; }
+					}
+				}
+				grid[i][j].number = count;
+			}
+		}
+		return grid
 	}
 
 
@@ -25,39 +42,77 @@ $(document).ready(function(){
 		return $("#size").val();
 	}
 
-	function board(size) {
-		this.size = size;
-		this.board = randBoard(size);
-	}
 
-	function displayBoard(size) {
-		var $row = $(".row");
-		var $cell = $(".cell");
+	function displayBoard() {
+		size = this.size;
 		var $board = $(".board");
+		$board.html(""); //clear the board
 
 		for (var i = 0; i < size; i++) {
-			console.log("!");
-			$row.append('<div>cell</div>'); 
+			$row = $('<div class="row"></div>');
+			for ( var j = 0; j < size; j++) {
+				if(this.board[i][j].clicked) {
+					$row.append('<div class="cell clicked"></div>');
+				} else {
+					$row.append('<div class="cell"></div>'); 			
+				}
+			}
+			console.log($row);
+			$board.append($row);
 		}
-		// for (var k = 0; k < size; k++) { $board.append($row); }
+	}
 
+	function cell() {
+		this.bomb = randBomb();
+		this.clicked = false;
+	}
+
+	function game(size) {
+		this.over = false;
+		this.size = size;
+		this.board = randBoard(size);
+		this.click = click;
+		this.printBoard = printBoard;
+		this.displayBoard = displayBoard;
+	}
+
+	function click(x,y){
+		var cell = this.board[x][y];
+		cell.clicked = true;
+		if (cell.bomb) {
+			console.log("BOOM!");
+			this.over = true;
+		}
+
+	}
+
+	function printBoard(){
+		for(var i = 0; i < this.size; i++){
+			var row = [];
+			for(var j = 0; j < this.size; j++) {
+				if (this.board[i][j].bomb) {
+					row.push("B");
+				}
+				else {
+					row.push("X");
+				}
+			}
+			console.log(row);
+		}
 	}
 
 
 
+	$(document).ready(function(){
 
-	$("#play").on("submit", function(e){
-		e.preventDefault();
-		size = grabSize();
-		game = new board(size);
-		displayBoard(size);
+		$("#play").on("submit", function(e){
+			e.preventDefault();
+			var size = grabSize();
+			var newGame = new game(size);
+			newGame.displayBoard();
+		});
+
+
+
 	});
 
-
-
-
-
-
-
-
-});
