@@ -121,6 +121,9 @@
 			$(this).css('background-color', '#555');
 			var val = newGame.click(row, col);
 			$(this).html(val);
+			if (val === "B") {
+				$(".board").off();
+			}
 		});
 
 
