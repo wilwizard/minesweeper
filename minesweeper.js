@@ -1,6 +1,4 @@
 
-
-
 	//function will return a bomb some of the time, and sometimes not
 	function randBomb(){ 
 		if (Math.random() > 0.4) { return false; }
@@ -52,13 +50,12 @@
 			$row = $('<div class="row"></div>');
 			for ( var j = 0; j < size; j++) {
 				if(this.board[i][j].clicked) {
-					$row.append('<div class="cell clicked"></div>');
+					$row.append('<div class="cell clicked" row="'+i+'" col="'+j+'"></div>');
 				} else {
-					$row.append('<div class="cell"></div>'); 			
+					$row.append('<div class="cell" row="'+i+'" col="'+j+'"></div>'); 			
 				}
 			}
-			console.log($row);
-			$board.append($row);
+;			$board.append($row);
 		}
 	}
 
@@ -82,7 +79,12 @@
 		if (cell.bomb) {
 			console.log("BOOM!");
 			this.over = true;
+			return "B";
+		}else{
+			return cell.number;
 		}
+
+
 
 	}
 
@@ -108,8 +110,17 @@
 		$("#play").on("submit", function(e){
 			e.preventDefault();
 			var size = grabSize();
-			var newGame = new game(size);
+			newGame = new game(size);
 			newGame.displayBoard();
+		});
+
+		$(".board").on("click", ".cell", function(){
+			var row = $(this).attr("row");
+			var col = $(this).attr("col");
+			console.log($(this));
+			$(this).css('background-color', '#555');
+			var val = newGame.click(row, col);
+			$(this).html(val);
 		});
 
 

@@ -5,15 +5,15 @@
 }
 
 .cell {
-	width : 30px;
-	height: 30px;
+	width : 28px;
+	height: 28px;
 	background-color: #AAA;
-	border-color: black;
-	display: inline;
+	border: solid 1px black;
+	float: left;
 }
 
 .row {
-	height: 30px;
+	height: 32px;
 }
 
 .clicked {
