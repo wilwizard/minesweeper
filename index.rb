@@ -1,5 +1,8 @@
-require 'sinatra'
+require 'sinatra/base'
 
-get '/' do
-	send_file 'index.html'
+
+class Server < Sinatra::Base
+	get '/' do
+		send_file 'index.html'
+	end
 end

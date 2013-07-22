@@ -1,4 +1,3 @@
-require 'sinatra'
+require Bundler.root.join('index')
 
-configure do
-end
+run Server
