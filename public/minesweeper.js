@@ -1,7 +1,8 @@
+$(document).ready(function(){
 
 	//function will return a bomb some of the time, and sometimes not
 	function randBomb(){ 
-		if (Math.random() > 0.4) { return false; }
+		if (Math.random() > 0.3) { return false; }
 		else { return true; }
 	}
 
@@ -83,9 +84,6 @@
 		}else{
 			return cell.number;
 		}
-
-
-
 	}
 
 	function printBoard(){
@@ -104,9 +102,6 @@
 	}
 
 
-
-	$(document).ready(function(){
-
 		$("#play").on("submit", function(e){
 			e.preventDefault();
 			var size = grabSize();
@@ -122,7 +117,7 @@
 			var val = newGame.click(row, col);
 			$(this).html(val);
 			if (val === "B") {
-				$(".board").off("click");
+				$(".board").off();
 			}
 		});
 	});
