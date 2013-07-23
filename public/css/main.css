@@ -1,10 +1,10 @@
-.container {
+.minesweeper-game .container {
 	width: 300px;
 	border: solid 1px black;
 	display: none;
 }
 
-.cell {
+.minesweeper-game .cell {
 	width : 28px;
 	height: 28px;
 	background-color: #AAA;
@@ -12,14 +12,14 @@
 	float: left;
 }
 
-.row {
+.minesweeper-game .row {
 	height: 32px;
 }
 
-.clicked {
+.minesweeper-game .clicked {
 	color: #555;
 }
 
-.board {
+.minesweeper-game .board {
 
 }
