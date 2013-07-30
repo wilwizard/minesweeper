@@ -1084,11 +1084,11 @@ var i,
 		"*(?:([*^$|!~]?=)" + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + identifier + ")|)|)" + whitespace + "*\\]",
 
 	// Prefer arguments quoted,
-	//   then not containing pseudos/brackets,
-	//   then attribute selectors/non-parenthetical expressions,
-	//   then anything else
+	//     then not containing pseudos/brackets,
+	//     then attribute selectors/non-parenthetical expressions,
+	//     then anything else
 	// These preferences are here to reduce the number of selectors
-	//   needing tokenize in the PSEUDO preFilter
+	//     needing tokenize in the PSEUDO preFilter
 	pseudos = ":(" + characterEncoding + ")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|" + attributes.replace( 3, 8 ) + ")*)|.*)\\)|)",
 
 	// Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
@@ -1599,7 +1599,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		// getElementById is not reliable as a find shortcut
 		delete Expr.find["ID"];
 
-		Expr.filter["ID"] =  function( id ) {
+		Expr.filter["ID"] =    function( id ) {
 			var attrId = id.replace( runescape, funescape );
 			return function( elem ) {
 				var node = typeof elem.getAttributeNode !== strundefined && elem.getAttributeNode("id");
@@ -1873,7 +1873,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 
 	if ( support.matchesSelector && documentIsHTML &&
 		( !rbuggyMatches || !rbuggyMatches.test( expr ) ) &&
-		( !rbuggyQSA     || !rbuggyQSA.test( expr ) ) ) {
+		( !rbuggyQSA         || !rbuggyQSA.test( expr ) ) ) {
 
 		try {
 			var ret = matches.call( elem, expr );
@@ -2369,9 +2369,9 @@ Expr = Sizzle.selectors = {
 		"empty": function( elem ) {
 			// http://www.w3.org/TR/selectors/#empty-pseudo
 			// :empty is only affected by element nodes and content nodes(including text(3), cdata(4)),
-			//   not comment, processing instructions, or others
+			//     not comment, processing instructions, or others
 			// Thanks to Diego Perini for the nodeName shortcut
-			//   Greater than "@" means alpha characters (specifically not starting with "#" or "?")
+			//     Greater than "@" means alpha characters (specifically not starting with "#" or "?")
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
 				if ( elem.nodeName > "@" || elem.nodeType === 3 || elem.nodeType === 4 ) {
 					return false;
@@ -3349,7 +3349,7 @@ jQuery.support = (function( support ) {
 
 	// Setup
 	div.setAttribute( "className", "t" );
-	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
+	div.innerHTML = "    <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 
 	// Finish early in limited (non-browser) environments
 	all = div.getElementsByTagName("*") || [];
@@ -5260,7 +5260,7 @@ jQuery.event = {
 				body = eventDoc.body;
 
 				event.pageX = original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 );
-				event.pageY = original.clientY + ( doc && doc.scrollTop  || body && body.scrollTop  || 0 ) - ( doc && doc.clientTop  || body && body.clientTop  || 0 );
+				event.pageY = original.clientY + ( doc && doc.scrollTop    || body && body.scrollTop    || 0 ) - ( doc && doc.clientTop    || body && body.clientTop    || 0 );
 			}
 
 			// Add relatedTarget, if necessary
@@ -5678,7 +5678,7 @@ jQuery.fn.extend({
 	off: function( types, selector, fn ) {
 		var handleObj, type;
 		if ( types && types.preventDefault && types.handleObj ) {
-			// ( event )  dispatched jQuery.Event
+			// ( event )    dispatched jQuery.Event
 			handleObj = types.handleObj;
 			jQuery( types.delegateTarget ).off(
 				handleObj.namespace ? handleObj.origType + "." + handleObj.namespace : handleObj.origType,
@@ -6046,7 +6046,7 @@ var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figca
 
 		// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
 		// unless wrapped in a div with non-breaking characters in front of it.
-		_default: jQuery.support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>"  ]
+		_default: jQuery.support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>"    ]
 	},
 	safeFragment = createSafeFragment( document ),
 	fragmentDiv = safeFragment.appendChild( document.createElement("div") );
@@ -6169,7 +6169,7 @@ jQuery.fn.extend({
 
 			// See if we can take a shortcut and just use innerHTML
 			if ( typeof value === "string" && !rnoInnerhtml.test( value ) &&
-				( jQuery.support.htmlSerialize || !rnoshimcache.test( value )  ) &&
+				( jQuery.support.htmlSerialize || !rnoshimcache.test( value )    ) &&
 				( jQuery.support.leadingWhitespace || !rleadingWhitespace.test( value ) ) &&
 				!wrapMap[ ( rtagName.exec( value ) || ["", ""] )[1].toLowerCase() ] ) {
 
@@ -7623,8 +7623,8 @@ var
 	/* Prefilters
 	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
-	 *    - BEFORE asking for a transport
-	 *    - AFTER param serialization (s.data is a string if s.processData is true)
+	 *        - BEFORE asking for a transport
+	 *        - AFTER param serialization (s.data is a string if s.processData is true)
 	 * 3) key is the dataType
 	 * 4) the catchall symbol "*" can be used
 	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
@@ -9593,7 +9593,7 @@ jQuery.fn.offset = function( options ) {
 	}
 	win = getWindow( doc );
 	return {
-		top: box.top  + ( win.pageYOffset || docElem.scrollTop )  - ( docElem.clientTop  || 0 ),
+		top: box.top    + ( win.pageYOffset || docElem.scrollTop )    - ( docElem.clientTop    || 0 ),
 		left: box.left + ( win.pageXOffset || docElem.scrollLeft ) - ( docElem.clientLeft || 0 )
 	};
 };
@@ -9671,7 +9671,7 @@ jQuery.fn.extend({
 			}
 
 			// Add offsetParent borders
-			parentOffset.top  += jQuery.css( offsetParent[ 0 ], "borderTopWidth", true );
+			parentOffset.top    += jQuery.css( offsetParent[ 0 ], "borderTopWidth", true );
 			parentOffset.left += jQuery.css( offsetParent[ 0 ], "borderLeftWidth", true );
 		}
 
@@ -9679,7 +9679,7 @@ jQuery.fn.extend({
 		// note: when an element has margin: auto the offsetLeft and marginLeft
 		// are the same in Safari causing offset.left to incorrectly be 0
 		return {
-			top:  offset.top  - parentOffset.top - jQuery.css( elem, "marginTop", true ),
+			top:    offset.top    - parentOffset.top - jQuery.css( elem, "marginTop", true ),
 			left: offset.left - parentOffset.left - jQuery.css( elem, "marginLeft", true)
 		};
 	},
@@ -9803,5 +9803,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 		define( "jquery", [], function () { return jQuery; } );
 	}
 }
+
 
 })( window );

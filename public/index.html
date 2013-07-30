@@ -3,16 +3,17 @@
 		<head>
 			<title>Minesweeper</title>
 			<script src="js/jquery-1.10.1.js"></script>
-			<script type="text/javascript" src="js/minesweeper.js"></script>
+			<script type="text/javascript" src="js/minesweeper-refactored.js"></script>
 			<link rel="stylesheet" type="text/css" href="css/main.css" />
 		</head>
 		<body>
 			<h2>Minesweeper</h2>
-			<form id="play">
-				<input type="text" id="size">
-				<input type="submit">
+			<form class="new-minesweeper-game">
+				<input type="text" name="size">
+				<input type="submit" value="start">
 			</form>
-			<div class="board"></div>
+			
+			<div class="minesweeper-games"></div>
 			<a href="https://github.com/wilwizard/minesweeper">GitHub</a>
 		</body>
 	</html>

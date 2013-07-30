@@ -102,23 +102,23 @@ $(document).ready(function(){
 	}
 
 
-		$("#play").on("submit", function(e){
-			e.preventDefault();
-			var size = grabSize();
-			newGame = new game(size);
-			newGame.displayBoard();
-		});
+	$("#play").on("submit", function(e){
+		e.preventDefault();
+		var size = grabSize();
+		newGame = new game(size);
+		newGame.displayBoard();
+	});
 
-		$(".board").on("click", ".cell", function(){
-			var row = $(this).attr("row");
-			var col = $(this).attr("col");
-			console.log($(this));
-			$(this).css('background-color', '#555');
-			var val = newGame.click(row, col);
-			$(this).html(val);
-			if (val === "B") {
-				$(".board").off();
-			}
-		});
+	$(".board").on("click", ".cell", function(){
+		var row = $(this).attr("row");
+		var col = $(this).attr("col");
+		console.log($(this));
+		$(this).css('background-color', '#555');
+		var val = newGame.click(row, col);
+		$(this).html(val);
+		if (val === "B") {
+			$(".board").off();
+		}
+	});
 	});
 
