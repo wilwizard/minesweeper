@@ -76,11 +76,14 @@ MinesweeperGame.Cell = function(board, x, y) {
 
 MinesweeperGame.Cell.prototype.nabors = function(){
     if (this._nabors) {
-        return this._nabors;
     } else { 
-        this._nabors = this.findNabors();
-        return this._nabors; 
+        var count = 0;
+        this.returnNabors().forEach(function(cell){
+            if (cell.bomb) {count++;}
+        });
+        this._nabors = count; 
 	}
+    return this._nabors;
 };
 
 MinesweeperGame.Cell.prototype.findNabors = function(){
@@ -98,6 +101,23 @@ MinesweeperGame.Cell.prototype.findNabors = function(){
     }
 
     return count;
+}
+
+MinesweeperGame.Cell.prototype.returnNabors = function(){
+    var x = this.x;
+    var y = this.y;
+    var board = this.board;
+    var size = this.board.size;
+    var count = 0;
+    var nabors = [];
+    var i, j;
+
+    for (i = Math.max(x-1, 0); i <= Math.min(x+1, size-1); i++){
+        for (j = Math.max(y-1, 0); j <= Math.min(y+1, size-1); j++){
+            if (i !== x || j !== y) { nabors.push(board.rows[i][j]); }
+        }
+    }
+    return nabors;
 }
 
 MinesweeperGame.Cell.prototype.value = function(){
@@ -119,8 +139,17 @@ MinesweeperGame.Cell.prototype.value = function(){
 
 
 MinesweeperGame.Cell.prototype.reveal = function(){
-	this.revealed = true;
-	return this;
+	if (this.revealed){
+        return this;
+    } else {
+        this.revealed = true;
+        if (this.nabors() === 0){
+            this.returnNabors().forEach(function(cell){
+                cell.reveal();
+            });
+        }
+	   return this;
+    }
 };
 
 MinesweeperGame.Cell.prototype.placeFlag = function(){
